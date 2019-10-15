@@ -36,3 +36,7 @@ https://exchangeratesapi.io/
 - run `python app.py`
 
 - go to localhost:3000
+
+### Run the tests
+
+- run `python convert_test.py`
