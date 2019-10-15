@@ -11,10 +11,6 @@ https://exchangeratesapi.io/
 
 ## Project Files
 
-- models.py: Contain the class representation for DB table.
-
-- create.py: File to build to DB tables and scrap the xml file to get the data and load it to DB
-
 - app.py: application file
 
 - wtform_fields: Contain wtforms class for the form and validator
