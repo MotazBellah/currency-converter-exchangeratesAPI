@@ -12,15 +12,6 @@ app.secret_key = os.urandom(12).hex()
 # to generate a token when WTF submitted
 app.config['WTF_CSRF_SECRET_KEY'] = "b'f\xfa\x8b{X\x8b\x9eM\x83l\x19\xad\x84\x08\xaa"
 
-# Configure the sqlalchemy url to get the url
-# from heroku if exsit or get the currency.db
-# DATABASE_URL = os.environ.get('DATABASE_URL', 'sqlite:///currency.db')
-# app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
-# Disable flask_sqlalchemy event system to save memory
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-# db = SQLAlchemy(app)
-
 # Main route display the form with get requset
 # redirect to convert route with post request
 @app.route('/', methods=['GET', 'POST'])
@@ -59,6 +50,7 @@ def convert():
     if src == dest:
         data['amount'] = amount
         data['currency'] = dest
+        print(data)
         return jsonify(data)
 
     # Make sure the date in the format YYYY-MM-DD
