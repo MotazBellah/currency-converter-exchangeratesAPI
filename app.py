@@ -54,9 +54,13 @@ def convert():
     amount = float(request.args.get('amount'))
     date = request.args.get('date')
 
-
     # Declare the data dict
     data = {}
+    if src == dest:
+        data['amount'] = amount
+        data['currency'] = dest
+        return jsonify(data)
+
     # Make sure the date in the format YYYY-MM-DD
     # else return empty JSON
     try:
@@ -66,16 +70,19 @@ def convert():
     else:
         url = "https://api.exchangeratesapi.io/{}?base={}&symbols={}".format(date, src, dest)
 
+
     h = httplib2.Http()
+    print(h)
     result = json.loads(h.request(url, 'GET')[1])
-    rate = result['rates'][dest]
-    date['amount'] = amount * rate
-    date['currency'] = dest
+    if 'rates' in result:
+        rate = result['rates'][dest]
+        data['amount'] = amount * rate
+        data['currency'] = dest
 
     return jsonify(data)
 
 
 if __name__ == '__main__':
-    PORT = int(os.environ.get('PORT', 7000))
+    PORT = int(os.environ.get('PORT', 3000))
     app.debug = True
     app.run(host='0.0.0.0', port=PORT)
