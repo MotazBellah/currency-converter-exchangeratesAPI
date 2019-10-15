@@ -70,10 +70,11 @@ def convert():
     else:
         url = "https://api.exchangeratesapi.io/{}?base={}&symbols={}".format(date, src, dest)
 
-
+    # use HTTP client library, to be able to send GET request
     h = httplib2.Http()
-    print(h)
+    # convert the JSON format to python dictionary
     result = json.loads(h.request(url, 'GET')[1])
+    # parse the result and get the rate value
     if 'rates' in result:
         rate = result['rates'][dest]
         data['amount'] = amount * rate
