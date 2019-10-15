@@ -50,7 +50,6 @@ def convert():
     if src == dest:
         data['amount'] = amount
         data['currency'] = dest
-        print(data)
         return jsonify(data)
 
     # Make sure the date in the format YYYY-MM-DD
